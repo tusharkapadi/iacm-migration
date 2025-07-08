@@ -1,0 +1,10 @@
+[{
+"key":         "key1",
+"value":       "val1",
+"value_type":  "string"
+},{
+"key":         "key2",
+"value":       "val2",
+"value_type":  "string"
+}
+]

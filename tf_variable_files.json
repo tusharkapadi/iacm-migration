@@ -1,0 +1,13 @@
+[{
+"repository": "repository",
+"repository_branch": "repository_branch",
+"repository_path": "repository_path",
+"repository_connector": "repository_connector"
+},
+{
+"repository": "repository",
+"repository_branch": "repository_branch",
+"repository_path": "repository_path2",
+"repository_connector": "repository_connector"
+}
+]
