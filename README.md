@@ -3,8 +3,9 @@
 ## Prerequisites
 
 * Docker
+* Fill out `.env` file with your Harness account ID and api key
 * Populate `./workspaces` directory with terraform workspaces to be migrated
-* The `input.csv` file filled out with the correct values for each workspace
+* Fill out the `input.csv` file with the correct values for each workspace
 
 ## Usage
 
