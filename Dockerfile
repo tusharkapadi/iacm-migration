@@ -9,3 +9,5 @@ RUN curl -LO https://github.com/minamijoyo/hcledit/releases/download/v0.2.17/hcl
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
+
+CMD [ "/bin/sh", "/app/script.sh" ]
