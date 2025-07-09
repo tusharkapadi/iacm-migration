@@ -2,4 +2,4 @@
 
 docker build . -t iacm-migration
 
-docker run -it -v $(dirname $0)/workspaces:/app/workspaces --env-file .env iacm-migration
+docker run -it -v $(dirname $0)/workspaces:/app/workspaces -v $(dirname $0)/configs:/app/configs --env-file .env iacm-migration
