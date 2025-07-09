@@ -9,7 +9,7 @@ locals {
     workspace_id              = workspace.workspace_id
     org_id                  = workspace.org_id
     project_id              = workspace.project_id
-    provisioner_type        = workspace.provisioner_type
+    provisioner_type        = lower(workspace.provisioner_type)
     provisioner_version     = workspace.provisioner_version
     repository              = workspace.repository
     repository_branch       = workspace.repository_branch
