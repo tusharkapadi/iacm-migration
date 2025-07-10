@@ -14,6 +14,9 @@ IFS=$'\n'
 for workspace in $(cat $csv_file)
 do
     if [ "$first_loop" == true ]; then
+        # Skip csv header
+        first_loop=false
+    else
         tf_path=$(echo $workspace | cut -d',' -f1)   
 
         echo "Processing $tf_path"
@@ -52,7 +55,5 @@ do
         git push -u origin "$git_branch"
 
         cd $last_working_dir
-    else
-        first_loop=false
     fi
 done
