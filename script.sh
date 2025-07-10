@@ -25,7 +25,7 @@ do
         cd $tf_path
 
         # Set safe directory to let git operate safely in this workspace
-        git config --global --add safe.directory "$tf_path"
+        git config --global --add safe.directory "$(readlink -f $tf_path)"
 
         echo "Removing Backend configuration..."
 
