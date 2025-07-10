@@ -1,5 +1,5 @@
 locals {
-  workspaces = [for workspace in csvdecode(file("${path.module}/input.csv")) : {
+  workspaces = [for workspace in csvdecode(file("${path.module}/${var.workspace_csv}")) : {
     tf_variables = jsondecode(file("${path.module}/${workspace.tf_variables_json}"))
     env_variables = jsondecode(file("${path.module}/${workspace.env_variables_json}"))
     tf_variable_files = jsondecode(file("${path.module}/${workspace.tf_variable_files_json}"))
