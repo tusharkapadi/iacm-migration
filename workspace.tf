@@ -2,7 +2,7 @@ locals {
   workspaces = [for workspace in csvdecode(file("${path.module}/${var.workspace_csv}")) : {
     tf_variables = jsondecode(file("${path.module}/${workspace.tf_variables_json}"))
     env_variables = jsondecode(file("${path.module}/${workspace.env_variables_json}"))
-    tf_variable_files = jsondecode(file("${path.module}/${workspace.tf_variable_files_json}"))
+    tf_variable_files = workspace.tf_variable_files == "" ? null : jsondecode(file("${path.module}/${workspace.tf_variable_files_json}")) #FIXNOW
     workspace_path                    = workspace.workspace_path # Not used to create workspaces, but use as index in the workspaces_map, and required to be in file for migration
     # TODO replace workspace_path with different key to remove requirement on this field, since it's not used when only creating a new workspace
     workspace_name                    = workspace.workspace_name

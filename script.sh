@@ -17,7 +17,8 @@ do
 
     echo "Processing $tf_path"
 
-    pushd $tf_path
+    last_working_dir=$(pwd)
+    cd $tf_path
 
     echo "Removing Backend configuration..."
 
@@ -46,5 +47,5 @@ do
     git commit -a -m "Remove backend configuration"
     git push -u origin "$git_branch"
 
-    popd
+    cd $last_working_dir
 done
