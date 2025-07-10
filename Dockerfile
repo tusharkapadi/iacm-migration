@@ -10,4 +10,4 @@ RUN mkdir /app
 COPY . /app
 WORKDIR /app
 
-CMD [ "/bin/sh", "/app/script.sh" ]
+ENTRYPOINT [ "/bin/sh" ]
