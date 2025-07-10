@@ -5,6 +5,7 @@ csv_file="$1"
 
 # Create Harness workspaces using CSV
 echo "Creating workspace in Harness..."
+tofu init
 tofu apply -var workspace_csv="$csv_file"
 
 # Loop through each workspace entry in CSV
