@@ -38,10 +38,11 @@ do
             if [ ! -z "$backend_block" ]
             then
                 # Change spaces in backend block into a regex whitespace match, to handle whitespace getting chomped from hcledit
-                regex=$(perl -0777 -pe "s/\s+/\\\s*/igs" <(echo -n $backend_block))
+                regex_noslashes=$(perl -0777 -pe "s#/#\\\/#igs" <(echo -n $backend_block))
+                regex=$(perl -0777 -pe "s/\s+/\\\E\\\s*\\\Q/igs" <(echo $regex_noslashes))
 
                 # Remove backend block match via regex (working around hcledit "hcledit block get terraform.backend" working, but not "hcledit block rm terraform.backend")
-                perl -0777 -pe "s/$regex//igs" $tf
+                perl -0777 -pe "s/\Q$regex\E//igs" $tf
             fi
         done
 
