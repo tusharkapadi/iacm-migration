@@ -2,9 +2,15 @@
 
 ## Prerequisites
 
-* Docker
-* Fill out `.env` file with your Harness account ID and api key
-* Populate `./workspaces` directory with terraform workspaces to be migrated
+### Dependencies
+* terraform
+* git
+* [hcledit](https://github.com/minamijoyo/hcledit)
+* perl
+
+### Setup
+* Create `.env` file with your Harness account ID and api key, using `.env.example` as an example
+* Copies of working directories for each workspace to be migrated should be put under the `./workspaces` directory
 * Fill out the `input.csv` file with the correct values for each workspace
 
 ## Usage
