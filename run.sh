@@ -3,11 +3,11 @@
 csv_file="$1"
 git_branch="iacm-migration-$RANDOM"
 
-# Set env variables needed for tofu workspace creation and state migration
-export $(cat .env | xargs)
-
 # Set TF password for backend to match HARNESS_PLATFORM_API_KEY already set by env file
 export TF_HTTP_PASSWORD="$HARNESS_PLATFORM_API_KEY"
+
+# Set env variables needed for tofu workspace creation and state migration
+export $(cat .env | xargs)
 
 # Create Harness workspaces using CSV
 echo "Creating workspace in Harness..."
