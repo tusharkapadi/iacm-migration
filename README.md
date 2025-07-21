@@ -3,7 +3,7 @@
 ## Prerequisites
 
 ### Dependencies
-* terraform
+* OpenTofu
 * git
 * [hcledit](https://github.com/minamijoyo/hcledit)
 * perl
@@ -15,4 +15,4 @@
 
 ## Usage
 
-To run the migration utility, type `./run.sh`
+To run the migration utility, type `./run.sh input.csv`
