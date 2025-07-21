@@ -4,9 +4,11 @@
 
 ### Dependencies
 * terraform
+* openTofu
 * git
 * [hcledit](https://github.com/minamijoyo/hcledit)
 * perl
+* VSCode or Terminal to execute commands
 
 ### Setup
 * Create `.env` file with your Harness account ID and api key, using `.env.example` as an example
@@ -15,4 +17,7 @@
 
 ## Usage
 
-To run the migration utility, type `./run.sh`
+* Set TF_HTTP_PASSWORD environment variable to supply your Personal Access Token to Terraform
+`export $TF_HTTP_PASSWORD=<Harness API key>`
+* Run the migration utility, 
+`./run.sh input.csv`
