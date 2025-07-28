@@ -15,12 +15,24 @@ locals {
     repository_branch       = workspace.repository_branch
     repository_path         = workspace.repository_path
     cost_estimation_enabled = workspace.cost_estimation_enabled == "false" ? false : true # default to true
-    provider_connector_id      = workspace.provider_connector_id
-    github_connector_id    = workspace.github_connector_id
+    provider_connector_id   = workspace.provider_connector_id
+    github_connector_id     = workspace.github_connector_id
+    iacm_backend_secret     = workspace.iacm_backend_secret != "" ? workspace.iacm_backend_secret : local.iacm_backend_secret_id
   }]
 
   workspaces_map = tomap({ for ws in local.workspaces : ws.workspace_path => ws })
 
+  iacm_backend_secret_id = "iacm_backend_harness_api_token_${filemd5("${path.module}/${var.workspace_csv}")}"
+}
+
+resource "harness_platform_secret_text" "iacm_backend_secret" {
+  identifier  = "iacm_backend_harness_api_token"
+  name        = local.iacm_backend_secret_id
+  description = "Harness API Token used to access IaCM backends, created by https://github.com/harness-community/iacm-migration"
+
+  secret_manager_identifier = "harnessSecretManager"
+  value_type                = "Inline"
+  value                     = "secret"
 }
 
 resource "harness_platform_workspace" "workspace" {
@@ -64,6 +76,13 @@ resource "harness_platform_workspace" "workspace" {
       repository_path      = terraform_variable_file.value["repository_path"]
       repository_connector = terraform_variable_file.value["repository_connector"]
     }
+  }
+
+  # Add env variable for iacm state backend
+  environment_variable {
+    key = "TF_HTTP_PASSWORD"
+    value = each.value.iacm_backend_secret
+    value_type = "secret"
   }
 
 #   variable_sets = [harness_platform_infra_variable_set.test.id]
