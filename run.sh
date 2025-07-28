@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+log_file=iacm-migration-$(date "+%Y%m%d%H%M%S").log
+
 csv_file="$1"
 git_branch="iacm-migration-$RANDOM"
 
@@ -11,8 +14,23 @@ export TF_HTTP_PASSWORD="$HARNESS_PLATFORM_API_KEY"
 
 # Create Harness workspaces using CSV
 echo "Creating workspace in Harness..."
-tofu init
+tofu init 2>&1 >$log_file
 tofu apply -var workspace_csv="$csv_file"
+
+# Ask for approval to commit backend updates, and migrate states
+echo "-----------------------------------"
+echo "The script will do the following: "
+echo "Create a git branch $git_branch in each workspace repostory."
+echo "Commit changes removing any existing backend configurations, adding a backend pointing to Harness IaCM"
+echo "Push this branch upstream, for review/merge."
+echo "Migrate state from existing backend, to the workspace in Harness IaCM."
+echo "-----------------------------------"
+echo -n "Enter \"yes\" to approve: "
+read approval
+if [ $approval != "yes" ]
+then
+    exit 1
+fi
 
 # Loop through each workspace entry in CSV to initalize workspace
 first_loop=true
@@ -34,7 +52,7 @@ do
         last_working_dir=$(pwd)
         cd $tf_path
 
-        tofu init
+        tofu init 2>&1 >$log_file
 
         echo "Removing Backend configuration..."
 
@@ -77,13 +95,13 @@ EOF
 
         # Migrate state
         echo "Migrating state..."
-        tofu init -migrate-state
+        echo "yes" | tofu init -migrate-state 2>&1 >$log_file
 
         # commit and push chnages to git
-        git checkout -b "$git_branch"
-        git add harness-backend.tf
-        git commit -a -m "Remove backend configuration"
-        git push -u origin "$git_branch"
+        git checkout -b "$git_branch" 2>&1 >$log_file
+        git add harness-backend.tf 2>&1 >$log_file
+        git commit -a -m "Remove backend configuration" 2>&1 >$log_file
+        git push -u origin "$git_branch" 2>&1 >$log_file
 
         cd $last_working_dir
     fi
