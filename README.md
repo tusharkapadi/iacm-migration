@@ -15,7 +15,7 @@ This utility helps create workspace(s) in Harness IaCM and migrates Infrastructu
 * Copies of working directories for each workspace to be migrated should be put under the `./workspaces` directory
 * Fill out the `input.csv` file with the correct values for each workspace. Refer `input.csv` schema section for more details on the fields
 
-###`input.csv` schema
+### `input.csv` schema
 | Name                   | Description                                                                                  | Example Value                                    | Required |
 |------------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------|----------|
 | workspace_path         | Relative local path to your workspace that was cloned on your local. Path needs to be relative from the folder where you will run the script. | workspaces/verint/env2                           | Yes      |
