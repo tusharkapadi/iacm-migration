@@ -6,7 +6,7 @@ This utility helps create workspace(s) in Harness IaCM and migrates Infrastructu
 2. Install following dependancies:
     * openTofu
     * git
-    * * [hcledit](https://github.com/minamijoyo/hcledit)
+    * [hcledit](https://github.com/minamijoyo/hcledit)
     * perl
 3. Generate a Harness [API key](https://developer.harness.io/docs/platform/automation/api/add-and-manage-api-keys/)
 
