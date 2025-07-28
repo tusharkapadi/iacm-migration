@@ -12,7 +12,7 @@ This utility helps create workspace(s) in Harness IaCM and migrates Infrastructu
 
 ### Setup
 * Create `.env` file with your Harness account ID and api key, using `.env.example` as an example
-* Copies of working directories for each workspace to be migrated should be put under the `./workspaces` directory
+* Copies of working directories for each workspace to be migrated should be put under the `./workspaces` directory. Clone your workspace repository(ies) in this folder.
 * Fill out the `input.csv` file with the correct values for each workspace. Refer `input.csv` schema section for more details on the fields
 
 ### `input.csv` schema
