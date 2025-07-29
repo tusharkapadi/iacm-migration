@@ -37,4 +37,4 @@ This utility helps create workspace(s) in Harness IaCM and migrates Infrastructu
 
 
 ## Usage
-To run the migration utility, type `./run.sh`
+To run the migration utility, type `./run.sh input.csv`
